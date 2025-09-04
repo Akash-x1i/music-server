@@ -4,15 +4,16 @@ const router = express.Router()
 const { spawn } = require("child_process");
 
 
-router.get("/:query", (req, res, next) => {
-    // req.query = query;
+// Use query parameter instead of route parameter
+router.get("/", (req, res, next) => {
     search(req, res);
 })
 
 
 const search = (req, res ) => {
-        console.log("running search: ", req.params.query)
-        const search = spawn("python", ["search.py", req.params.query])
+        const query = req.query.song;
+        console.log("running search: ", query)
+        const search = spawn("python", ["search.py", query])
         let output = "";
 
         search.stdout.on("data", (data) => {
@@ -32,7 +33,7 @@ const search = (req, res ) => {
            try {
                 const filePath = path.join(__dirname,"..", "local", "yt", filename);
                 console.log(filePath, filename)
-                res.download(filePath, filename, (err) => {
+                res.download(filePath, query.concat(".mp3"), (err) => {
                 if (err) {
                     console.log("starting download.py\n", output);
                     const download = spawn("python", ["download.py", output]);
@@ -46,7 +47,7 @@ const search = (req, res ) => {
                     });
                     download.on("close", (code) => {
                         console.log(`Python process exited with code ${code}`);
-                        res.download(filePath, filename)
+                        res.download(filePath, query.concat(".mp3"));
                         console.log("Download successfull!\n\n")
                     })
                 } else {

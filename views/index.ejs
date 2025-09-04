@@ -3,11 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejs Index Page</title>
+    <title>Song Downloadizer</title>
+    <link rel="icon" type="image/jpeg" href="/icon.jpg">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <p class="">Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</p>
-    <a href="./users">users</a>
-    <a href="./users/new">new users</a>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center text-blue-600">Song Search</h1>
+        <form action="/search/" method="get" class="space-y-4">
+            <div>
+                <label for="song" class="block text-gray-700 font-medium mb-2">Song Name:</label>
+                <input type="text" id="song" name="song" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition duration-200">
+                Search
+            </button>
+        </form>
+    </div>
 </body>
 </html>
