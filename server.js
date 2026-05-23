@@ -14,4 +14,7 @@ const searchRouter = require("./routes/search");
 
 app.use("/users", userRouter);
 app.use("/search", searchRouter);
-app.listen(3000);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
